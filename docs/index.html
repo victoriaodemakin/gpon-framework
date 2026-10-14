@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="egsmnYqWu02fsi_XgZCQ8q998XCjEEep_Usqu69kXxE" />
   <title>GPON Malware Framework</title>
   <meta name="description" content="Turns completed static and dynamic malware analysis into a GPON/IoT response and detection framework. Runs entirely in your browser.">
   <link rel="stylesheet" href="style.css">
@@ -75,6 +76,20 @@
 
     <div id="warnings"></div>
     <article id="output"></article>
+
+    <footer class="card about" id="about">
+      <h2>About this tool</h2>
+      <p>An academic, defensive security project. Analysts paste the <em>results</em> of malware analysis they have
+        already performed (notes, <code>strings</code>/<code>readelf</code> output, sandbox reports) and the page
+        generates a detection and incident-response framework for ISPs: indicators of compromise, MITRE ATT&amp;CK
+        mapping, YARA/Suricata detection rules and mitigation steps.</p>
+      <ul>
+        <li>Runs entirely in your browser. Nothing you paste or select is uploaded or stored anywhere.</li>
+        <li>No accounts, passwords or personal data are requested.</li>
+        <li>Hosts and distributes no malware, and executable files are rejected. The exploit strings in the code are detection signatures used to recognise known attacks.</li>
+      </ul>
+      <p>Source code: <a href="https://github.com/victoriaodemakin/gpon-framework">github.com/victoriaodemakin/gpon-framework</a></p>
+    </footer>
   </main>
 </div>
 

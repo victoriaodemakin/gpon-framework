@@ -170,3 +170,9 @@ h4 { font-size: 13px; margin: 14px 0 4px; }
   pre { white-space: pre-wrap; word-break: break-all; border: 1px solid #ccc; }
   details { display: block; } details > * { display: block; }
 }
+
+.about h2 { font-size: 14px; margin-bottom: 6px; }
+.about p, .about li { font-size: 13px; color: var(--muted); margin: 6px 0; }
+.about ul { padding-left: 18px; margin: 6px 0; }
+.about a { color: var(--accent); }
+@media print { .about { display: none; } }
