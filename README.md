@@ -29,17 +29,21 @@ python -m venv .venv
 .venv\Scripts\python -m pytest -q                            # regression tests
 ```
 
-## Deploy on Render
+## Publish on GitHub Pages
 
-1. Push this folder to a GitHub repository.
-2. On https://render.com choose **New > Blueprint** and select the repository
-   (`render.yaml` supplies the build and start commands).
-3. When asked, type a value for **APP_PASSWORD**. The site then asks every visitor for
-   a login: username `admin` (change it with `APP_USERNAME`) and that password.
-4. Deploy. The app is served by `gunicorn app:app`; `/healthz` is the health check.
+`docs/` is a browser-only build of the same app: the engine is ported to JavaScript
+(`docs/engine.js`) and runs inside the visitor's browser, so there is no server and
+no analysis data ever leaves the user's machine. A parity test checks that it gives
+exactly the same output as the Python engine.
 
-If `APP_PASSWORD` is not set, the app has no login. That is fine on `127.0.0.1` but
-not on a public URL.
+1. On GitHub: **Settings > Pages > Build and deployment > Source: Deploy from a branch**,
+   then branch `main`, folder `/docs`, and **Save**. (Pages on a private repository
+   needs GitHub Pro; on a free account make the repository public first.)
+2. About a minute later the site is at `https://<username>.github.io/<repo>/`.
+
+After editing `engine/rules.py`, run `python tools/export_rules.py` to regenerate
+`docs/rules.js`. Logic changes in `engine/*.py` must be mirrored in `docs/engine.js`;
+`tests/test_parity.py` fails until they match (it needs Node.js).
 
 ## What it generates (8 sections)
 
@@ -97,6 +101,8 @@ engine/generate.py  builds the framework + cross-sample correlation
 engine/detect.py    YARA / Suricata / hunting commands
 engine/playbook.py  ISP operator framework
 engine/render.py    Markdown export
+docs/               GitHub Pages build (engine.js, rules.js generated, app.js)
+tools/              export_rules.py - regenerates docs/rules.js
 samples/sampleN/    static.txt, dynamic.txt, meta.json (transcribed from the reports)
 tests/              regression tests
 ```

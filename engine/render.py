@@ -16,8 +16,10 @@ def to_markdown(fw):
           f"**GPON relevance:** {v['gpon_relevance']}", ""]
 
     md += ["## 1. Sample identity", "", _table(["Field", "Value"], [
-        ["SHA256", i["sha256"]], ["Platform", i["platform"]], ["Architecture", f"{i['arch']} {i['bits'] or ''}-bit {i['endian'] or ''}-endian"],
-        ["Linking / symbols", f"{i['linking']} / {'stripped' if i['stripped'] else 'not stripped' if i['stripped'] is False else '?'}"],
+        ["SHA256", i["sha256"] or "-"], ["Platform", i["platform"]],
+        ["Architecture", " ".join(x for x in [i["arch"], i["bits"] and f"{i['bits']}-bit",
+                                              i["endian"] and f"{i['endian']}-endian"] if x) or "unknown"],
+        ["Linking / symbols", f"{i['linking'] or 'unknown'} / {'stripped' if i['stripped'] else 'not stripped' if i['stripped'] is False else '?'}"],
         ["File size", f"{i['file_size']:,} bytes" if i["file_size"] else "-"],
         ["Family (engine)", f"{i['family']} - {i['family_confidence']} confidence"],
         ["Family (analyst)", i["family_analyst"] or "-"], ["Role", ", ".join(i["roles"])]]), "",
